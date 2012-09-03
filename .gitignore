@@ -8,6 +8,6 @@ bin-release/
 .settings/
 .project
 
-.idea/**/*
+.idea
 node_modules/**/*
 .DS_Store
