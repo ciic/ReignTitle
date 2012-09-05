@@ -38,7 +38,7 @@ http.createServer(app).listen(app.get('port'), function(){
 //数据持久化
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
-//TODO 储存后并查询出来。
+//数据保存。
 app.post('/saveInput', function (req, res) {
 
 //    var tmp_path = req.files.file.path;
@@ -73,7 +73,7 @@ app.post('/saveInput', function (req, res) {
     });
 //    res.end();
 });
-
+//批量数据保存
 app.post('/saveInputMulti', function (req, res) {
 
 //    var tmp_path = req.files.file.path;
@@ -139,6 +139,7 @@ app.post('/saveInputMulti', function (req, res) {
 //    });
 //    res.end();
 });
+//头像上传并更新数据
 app.post('/imageUpload', function (req, res) {
 
     var tmp_path = req.files.file.path;
@@ -174,6 +175,7 @@ app.post('/imageUpload', function (req, res) {
     });
 //    res.end();
 });
+//进入更新页面
 app.get('/update',function(req,res){
     var ObjectID =  require("mongodb").ObjectID;
 
@@ -204,6 +206,7 @@ app.get('/update',function(req,res){
 
 
 })
+//更新保存
 app.post('/updateSave', function (req, res) {
 
     var tmp_path = req.files.file.path;
@@ -247,6 +250,7 @@ app.post('/updateSave', function (req, res) {
     });
 //    res.end();
 });
+//删除
 app.get('/remove', function (req, res) {
 
     var ObjectID = require('mongodb').ObjectID;
@@ -276,14 +280,14 @@ app.get('/remove', function (req, res) {
     });
 //    res.end();
 });
-
+//进入添加页面
 app.get('/input', function (req, res) {
     res.redirect('input.html');
     res.end();
 });
 
 //fu.get("/input", fu.staticHandler("input.html"));
-
+//列表
 app.get('/list',function(req,res){
     var users=[];
     var reigntitles= new Array();
