@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<form method="post" action="saveInput"  onsubmit="return validate(this);" enctype="multipart/form-data">
+    姓名：<input name="name"/><br/>
+    庙号：<input name="templename"/><br/>
+    谥号：<input name="posthumoustitle"/><br/>
+    年号：<input name="reigntitle" /><br/><br/>
+
+   <br/><br/>
+    <input type="submit" value="保存" />
+
+
+<script type="text/javascript">
+function validate(formobj){
+var isTrue = true;
+    var message = "";
+
+    if(formobj.name.value==""){
+        message="姓名必填";
+        isTrue= false;
+    }
+    if(formobj.templename.value==""){
+        message="庙号必填";
+        isTrue= false;
+    }
+    if(formobj.posthumoustitle.value==""){
+        message="谥号必填";
+        isTrue= false;
+    }
+    if(formobj.reigntitle.value==""){
+        message="年号必填";
+        isTrue= false;
+    }
+if(message!=""){alert(message);}
+
+  return isTrue;
+}
+
+</script>
+        </form>
+</body>
+</html>

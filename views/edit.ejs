@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<form method="post" action="updateSave"  enctype="multipart/form-data">
+<input name="_id" type="hidden" value="<%=item._id  %>"/>
+    姓名：<input name="name" value="<%=item.name  %>"/><br/>
+    庙号：<input name="templename" value="<%=item.templename  %>"/><br/>
+    谥号：<input name="posthumoustitle" value="<%=item.posthumoustitle  %>"/><br/>
+    年号：<input name="reigntitle"  value="<%=item.reigntitle  %>"/><br/><br/>
+头像：<img src="/images/<%=item.imagename  %>" width="150" height="150"/>
+ 重新上传： <input type="file" name="file" /><br/><br/>
+    <input type="submit" value="修改" />
+
+
+
+</form>
+</body>
+</html>
