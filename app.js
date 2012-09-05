@@ -8,8 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   ,fs = require('fs')
-  , path = require('path'),
-    jquery = require('jquery');
+  , path = require('path');
 
 var app = express();
 
