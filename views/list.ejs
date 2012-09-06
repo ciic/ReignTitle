@@ -7,13 +7,18 @@
   <body>
 
 <table>
-<tr><td colspan="6"> <a href="/input">添加</a></td></tr>
-<tr><td colspan="6"> <a  href="javaScript:void(0)" onClick="window.open('inputMulti.html','new','height=500, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');" >批量添加</a></td></tr>
+<tr><td colspan="7"> <a href="/input">添加</a></td></tr>
+<tr><td colspan="7"> <a  href="javaScript:void(0)" onClick="window.open('inputMulti.html','new','height=500, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');" >批量添加</a></td></tr>
 
-<tr><td>头像</td><td>姓名</td><td>庙号</td><td>谥号</td><td>年号</td><td>操作</td></tr>
+<tr><td>头像</td><td>gridfs头像</td><td>姓名</td><td>庙号</td><td>谥号</td><td>年号</td><td>操作</td></tr>
 <% for(var i=0; i<items.length; i++) {%>
 <tr>
-<td><img src="/images/<%=items[i].imagename  %>" width="50" height="50"/></td>
+<td><img src="/images/<%=items[i].imagename  %>" width="50" height="50"/>
+
+     </td>
+     <td><img src="/showImage?id=<%=items[i].imageid  %>" width="50" height="50"/>
+
+     </td>
 <td><%=items[i].name  %></td>
 <td><%=items[i].templename  %>
 </td><td><%=items[i].posthumoustitle  %>

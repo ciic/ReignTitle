@@ -8,8 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   ,fs = require('fs')
-  , path = require('path');
-
+  , path = require('path'),
+    GridStore=require('mongodb').GridStore;
 var app = express();
 
 app.configure(function(){
@@ -139,7 +139,86 @@ app.post('/saveInputMulti', function (req, res) {
 //    });
 //    res.end();
 });
-//头像上传并更新数据
+//获取头像流。gridfs方式
+app.get('/showImage', function (req, res) {
+
+
+
+
+    var ObjectID =  require("mongodb").ObjectID;
+
+    var id =new ObjectID(req.query.id);
+
+
+
+    var db=new Db('test',new Server('localhost',27017,{auto_reconnect:true}, {}));
+    GridStore.read(db, id, function (err, data) {
+        console.log('data:' + data.length);
+        res.write(data);
+    });
+
+
+
+
+//    res.end();
+});
+//头像上传并更新数据，gridfs存在数据库方式
+app.post('/imageSave', function (req, res) {
+
+    var tmp_path = req.files.file.path;
+    var target_path = './public/images/' + req.files.file.name;
+    fs.rename(tmp_path, target_path, function (err) {
+        if (err) throw err;
+
+    });
+
+
+    var ObjectID =  require("mongodb").ObjectID;
+
+    var query={};
+    query._id=new ObjectID(req.body._id);
+
+    var user={};
+
+    user.imagepath = target_path;
+    user.imagename = req.files.file.name;
+    user.imageid = new ObjectID();
+
+    var db=new Db('test',new Server('localhost',27017,{auto_reconnect:true}, {}));
+
+    var gridStore=new GridStore(db,user.imageid,req.files.file.name,'w');
+    gridStore.open(function (err, gridStore) {//打开
+        gridStore.writeFile(req.files.file.path, function () {
+            gridStore.close(function (err, result) {
+
+
+                //user.fileid
+
+
+                db.open(function(){
+                    console.log('db opened');
+                    db.collection('reigntitle',function(err,collection){
+                        if (err) callback(err);
+//console.log({$set: user});
+                        collection.update(query,{$set: user},{safe:true},function(err,docs){
+
+                            res.redirect('list');
+                            res.end();
+                        });
+                    });
+                });
+
+
+            });
+        });
+    });
+
+
+
+
+//    res.end();
+});
+//头像上传并更新数据，物理存储方式
 app.post('/imageUpload', function (req, res) {
 
     var tmp_path = req.files.file.path;
